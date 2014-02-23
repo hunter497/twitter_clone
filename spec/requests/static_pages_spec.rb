@@ -2,58 +2,35 @@ require 'spec_helper'
 
 describe "StaticPages" do
 
+  subject { page }
   let(:base_title) { "Ruby on Rails Tutorial Twitter Clone" }
 
   describe "Home page" do
-    it "should have the content 'Twitter Clone'" do
-      visit '/static_pages/home'
-      expect(page).to have_content('Twitter Clone')
-    end
+    before { visit root_path }
 
-  	it "should have the base title" do
-  		visit '/static_pages/home'
-  		expect(page).to have_title("#{base_title}")
-  	end
-
-  	it "should not have a custom page title" do
-  		visit '/static_pages/home'
-  		expect(page).not_to have_title('| Home')
-  	end
+    it { should have_content('Twitter Clone') }
+    it { should have_title(full_title) }
+    it { should_not have_title(full_title('Home')) }
   end
 
   describe "Help page" do
-  	it "should have the content 'Help'" do
-  		visit '/static_pages/help'
-  		expect(page).to have_content('Help')
-  	end
+    before { visit help_path }
 
-  	it "should have the right title" do
-  		visit '/static_pages/help'
-  		expect(page).to have_title("#{base_title} | Help")
-  	end
+  	it { should have_content('Help') }
+    it { should have_title(full_title('Help')) }
   end
 
   describe "About page" do
-  	it "should have the content 'About Us'" do
-  		visit '/static_pages/about'
-  		expect(page).to have_content('About Us')
-  	end
+    before { visit about_path }
 
-  	it "should have the right title" do
-  		visit '/static_pages/about'
-  		expect(page).to have_title("#{base_title} | About")
-  	end
+    it { should have_content('About Us') }
+    it { should have_title(full_title('About')) }
   end
 
   describe "Contact page" do 
-  	it "should have the content 'Contact Us'" do
-  		visit '/static_pages/contact'
-  		expect(page).to have_content('Contact Us')
-  	end
+    before { visit contact_path }
 
-  	it "should have the right title" do
-  		visit '/static_pages/contact'
-  		expect(page).to have_title("#{base_title} | Contact")
-  	end
+    it { should have_content('Contact Us') }
+    it { should have_title(full_title('Contact')) }
   end
 end
